@@ -808,6 +808,8 @@ dtb-$(CONFIG_SOC_IMX6UL) += \
 	imx6ulz-14x14-evk.dtb \
 	imx6ulz-14x14-evk-btwifi.dtb \
 	imx6ulz-14x14-evk-emmc.dtb \
+	imx6ull-14x14-jerry-emmc.dtb \
+	imx6ull-14x14-jerry.dtb\
 	imx6ulz-14x14-evk-gpmi-weim.dtb \
 	imx6ulz-bsh-smm-m2.dtb
 
