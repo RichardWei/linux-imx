@@ -5,11 +5,18 @@
 /dts-v1/;
 
 #include "imx6ull.dtsi"
-#include "imx6ul-14x14-evk.dtsi"
+#include "imx6ul-14x14-jerry.dtsi"
 
 / {
 	model = "Freescale i.MX6 ULL 14x14 jerry Board";
 	compatible = "fsl,imx6ull-14x14-evk", "fsl,imx6ull";
+	backlight {
+		compatible = "pwm-backlight";
+		pwms = <&pwm1 0 5000000>;
+		brightness-levels = <0 4 8 16 32 64 128 255>;
+		default-brightness-level = <6>;
+		status = "okay";
+	};
 };
 
 &clks {
@@ -22,8 +29,8 @@
 	status = "okay";
 };
 
-&ov5640 {
-	status = "okay";
-};
+// &ov5640 {
+// 	status = "okay";
+// };
 
 /delete-node/ &sim2;

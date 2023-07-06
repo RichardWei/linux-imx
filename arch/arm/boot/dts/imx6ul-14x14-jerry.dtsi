@@ -70,13 +70,13 @@
 		regulator-always-on;
 	};
 
-	reg_can_3v3: regulator-can-3v3 {
-		compatible = "regulator-fixed";
-		regulator-name = "can-3v3";
-		regulator-min-microvolt = <3300000>;
-		regulator-max-microvolt = <3300000>;
-		gpios = <&gpio_spi 3 GPIO_ACTIVE_LOW>;
-	};
+	// reg_can_3v3: regulator-can-3v3 {
+	// 	compatible = "regulator-fixed";
+	// 	regulator-name = "can-3v3";
+	// 	regulator-min-microvolt = <3300000>;
+	// 	regulator-max-microvolt = <3300000>;
+	// 	gpios = <&gpio_spi 3 GPIO_ACTIVE_LOW>;
+	// };
 
 	sound-wm8960 {
 		compatible = "fsl,imx-audio-wm8960";
@@ -100,29 +100,29 @@
 			"AMIC", "MICB";
 	};
 
-	spi-4 {
-		compatible = "spi-gpio";
-		pinctrl-names = "default";
-		pinctrl-0 = <&pinctrl_spi4>;
-		status = "okay";
-		gpio-sck = <&gpio5 11 0>;
-		gpio-mosi = <&gpio5 10 0>;
-		cs-gpios = <&gpio5 7 GPIO_ACTIVE_LOW>;
-		num-chipselects = <1>;
-		#address-cells = <1>;
-		#size-cells = <0>;
+	// spi-4 {
+	// 	compatible = "spi-gpio";
+	// 	pinctrl-names = "default";
+	// 	pinctrl-0 = <&pinctrl_spi4>;
+	// 	status = "okay";
+	// 	gpio-sck = <&gpio5 11 0>;
+	// 	gpio-mosi = <&gpio5 10 0>;
+	// 	cs-gpios = <&gpio5 7 GPIO_ACTIVE_LOW>;
+	// 	num-chipselects = <1>;
+	// 	#address-cells = <1>;
+	// 	#size-cells = <0>;
 
-		gpio_spi: gpio@0 {
-			compatible = "fairchild,74hc595";
-			gpio-controller;
-			#gpio-cells = <2>;
-			reg = <0>;
-			registers-number = <1>;
-			registers-default = /bits/ 8 <0x57>;
-			spi-max-frequency = <100000>;
-			enable-gpios = <&gpio5 8 GPIO_ACTIVE_LOW>;
-		};
-	};
+	// 	gpio_spi: gpio@0 {
+	// 		compatible = "fairchild,74hc595";
+	// 		gpio-controller;
+	// 		#gpio-cells = <2>;
+	// 		reg = <0>;
+	// 		registers-number = <1>;
+	// 		registers-default = /bits/ 8 <0x57>;
+	// 		spi-max-frequency = <100000>;
+	// 		enable-gpios = <&gpio5 8 GPIO_ACTIVE_LOW>;
+	// 	};
+	// };
 };
 
 &clks {
@@ -130,15 +130,15 @@
 	assigned-clock-rates = <786432000>;
 };
 
-&csi {
-	status = "disabled";
+// &csi {
+// 	status = "disabled";
 
-	port {
-		csi1_ep: endpoint {
-			remote-endpoint = <&ov5640_ep>;
-		};
-	};
-};
+// 	port {
+// 		csi1_ep: endpoint {
+// 			remote-endpoint = <&ov5640_ep>;
+// 		};
+// 	};
+// };
 
 &i2c2 {
 	clock-frequency = <100000>;
@@ -157,43 +157,43 @@
 		clock-names = "mclk";
 	};
 
-	ov5640: ov5640@3c {
-		compatible = "ovti,ov5640";
-		reg = <0x3c>;
-		pinctrl-names = "default";
-		pinctrl-0 = <&pinctrl_csi1 &pinctrl_camera_clock>;
-		clocks = <&clks IMX6UL_CLK_CSI>;
-		clock-names = "csi_mclk";
-		pwn-gpios = <&gpio_spi 6 1>;
-		rst-gpios = <&gpio_spi 5 0>;
-		csi_id = <0>;
-		mclk = <24000000>;
-		mclk_source = <0>;
-		status = "disabled";
-		port {
-			ov5640_ep: endpoint {
-				remote-endpoint = <&csi1_ep>;
-			};
-		};
-	};
+	// ov5640: ov5640@3c {
+	// 	compatible = "ovti,ov5640";
+	// 	reg = <0x3c>;
+	// 	pinctrl-names = "default";
+	// 	pinctrl-0 = <&pinctrl_csi1 &pinctrl_camera_clock>;
+	// 	clocks = <&clks IMX6UL_CLK_CSI>;
+	// 	clock-names = "csi_mclk";
+	// 	pwn-gpios = <&gpio_spi 6 1>;
+	// 	rst-gpios = <&gpio_spi 5 0>;
+	// 	csi_id = <0>;
+	// 	mclk = <24000000>;
+	// 	mclk_source = <0>;
+	// 	status = "disabled";
+	// 	port {
+	// 		ov5640_ep: endpoint {
+	// 			remote-endpoint = <&csi1_ep>;
+	// 		};
+	// 	};
+	// };
 
 };
 
 &fec1 {
 	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_enet1>;
+	pinctrl-0 = <&pinctrl_enet1&pinctrl_enet1_reset>;
 	phy-mode = "rmii";
 	phy-handle = <&ethphy0>;
-	phy-supply = <&reg_peri_3v3>;
+	// phy-supply = <&reg_peri_3v3>;
 	status = "okay";
 };
 
 &fec2 {
 	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_enet2>;
+	pinctrl-0 = <&pinctrl_enet2&pinctrl_enet2_reset>;
 	phy-mode = "rmii";
 	phy-handle = <&ethphy1>;
-	phy-supply = <&reg_peri_3v3>;
+	// phy-supply = <&reg_peri_3v3>;
 	status = "okay";
 
 	mdio {
@@ -219,35 +219,35 @@
 	};
 };
 
-&can1 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_flexcan1>;
-	xceiver-supply = <&reg_can_3v3>;
-	status = "okay";
-};
+// &can1 {
+// 	pinctrl-names = "default";
+// 	pinctrl-0 = <&pinctrl_flexcan1>;
+// 	xceiver-supply = <&reg_can_3v3>;
+// 	status = "okay";
+// };
 
-&can2 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_flexcan2>;
-	xceiver-supply = <&reg_can_3v3>;
-	status = "okay";
-};
+// &can2 {
+// 	pinctrl-names = "default";
+// 	pinctrl-0 = <&pinctrl_flexcan2>;
+// 	xceiver-supply = <&reg_can_3v3>;
+// 	status = "okay";
+// };
 
-&gpio_spi {
-	eth0-phy-hog {
-		gpio-hog;
-		gpios = <1 GPIO_ACTIVE_HIGH>;
-		output-high;
-		line-name = "eth0-phy";
-	};
+// &gpio_spi {
+// 	eth0-phy-hog {
+// 		gpio-hog;
+// 		gpios = <1 GPIO_ACTIVE_HIGH>;
+// 		output-high;
+// 		line-name = "eth0-phy";
+// 	};
 
-	eth1-phy-hog {
-		gpio-hog;
-		gpios = <2 GPIO_ACTIVE_HIGH>;
-		output-high;
-		line-name = "eth1-phy";
-	};
-};
+// 	eth1-phy-hog {
+// 		gpio-hog;
+// 		gpios = <2 GPIO_ACTIVE_HIGH>;
+// 		output-high;
+// 		line-name = "eth1-phy";
+// 	};
+// };
 
 &i2c1 {
 	clock-frequency = <100000>;
@@ -289,15 +289,15 @@
 			native-mode = <&timing0>;
 
 			timing0: timing0 {
-				clock-frequency = <9200000>;
-				hactive = <480>;
-				vactive = <272>;
-				hfront-porch = <8>;
-				hback-porch = <4>;
-				hsync-len = <41>;
-				vback-porch = <2>;
-				vfront-porch = <4>;
-				vsync-len = <10>;
+				clock-frequency = <51200000>;
+				hactive = <1024>;
+				vactive = <600>;
+				hfront-porch = <160>;
+				hback-porch = <140>;
+				hsync-len = <20>;
+				vback-porch = <20>;
+				vfront-porch = <12>;
+				vsync-len = <3>;
 				hsync-active = <0>;
 				vsync-active = <0>;
 				de-active = <1>;
@@ -759,4 +759,17 @@
 			MX6UL_PAD_LCD_RESET__WDOG1_WDOG_ANY    0x30b0
 		>;
 	};
+
+	pinctrl_enet1_reset: enet1resetgrp {
+			fsl,pins = <
+				MX6ULL_PAD_SNVS_TAMPER7__GPIO5_IO07	0x10B0
+			>;
+			};
+
+		
+		pinctrl_enet2_reset: enet2resetgrp {
+			fsl,pins = <
+				MX6ULL_PAD_SNVS_TAMPER8__GPIO5_IO08 0x10b0 /* ENET2 RESET */
+			>;
+		};
 };
