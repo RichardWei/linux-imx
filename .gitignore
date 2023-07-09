@@ -168,3 +168,5 @@ sphinx_*/
 
 # Rust analyzer configuration
 /rust-project.json
+
+!lib/firmware/imx/sdma/sdma-imx6q.bin
